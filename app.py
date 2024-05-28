@@ -7,10 +7,6 @@ from itertools import islice
 from plotly.subplots import make_subplots
 
 
-##################################################################
-### Configure App
-##################################################################
-
 st.set_page_config(page_title="Stocks Dashboard", page_icon="💹", layout="wide")
 st.html("styles.html")
 pio.templates.default = "plotly_white"
@@ -24,11 +20,6 @@ def batched(iterable, n_cols):
     it = iter(iterable)
     while batch := tuple(islice(it, n_cols)):
         yield batch
-
-
-##################################################################
-### Data
-##################################################################
 
 
 @st.cache_data
@@ -79,11 +70,6 @@ def transform_data(ticker_df, history_dfs):
     ticker_df["Open"] = ticker_to_open
 
     return ticker_df, history_dfs
-
-
-##################################################################
-### App Widgets
-##################################################################
 
 
 def plot_sparkline(data):
@@ -319,10 +305,6 @@ def display_overview(ticker_df):
             use_container_width=True,
         )
 
-
-##################################################################
-### Main App
-##################################################################
 
 ticker_df, history_dfs = download_data()
 ticker_df, history_dfs = transform_data(ticker_df, history_dfs)
